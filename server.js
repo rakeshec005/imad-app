@@ -15,11 +15,11 @@ app.get('/article-one', (req, res) => {
 });
 
 app.get('/article-two', (req, res) => {
-  res.send('Article two requested');
+  res.sendFile(__dirname, 'ui', 'article-two.html');
 });
 
 app.get('/article-three', (req, res) => {
-  res.send('Article three requested');
+  res.sendFile(__dirname, 'ui', 'article-three.html');
 });
 
 app.get('/ui/style.css', function (req, res) {
