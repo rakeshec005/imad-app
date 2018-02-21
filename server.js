@@ -84,6 +84,13 @@ let createTemplate = data => {
   `;
   return htmlTemplate;
 };
+
+// added counter end point
+let cont = 0;
+app.get("/cont", (req, res) => {
+  cont += 1;
+  res.send(cont.toString());
+});
 // Handling specific url
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "ui", "index.html"));
