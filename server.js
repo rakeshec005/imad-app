@@ -31,7 +31,7 @@ let createTemplate = data => {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>$[title]</title>
+      <title>${title}</title>
       <link rel="stylesheet" href="/ui/style.css">
   </head>
 
@@ -40,9 +40,9 @@ let createTemplate = data => {
           <a href="/">Home</a>
           <hr>
           <h3>Article First</h3>
-          <div>$[date]</div>
+          <div>${date}</div>
           <div>
-            $[content]
+            ${content}
           </div>
       </div>
   </body>
