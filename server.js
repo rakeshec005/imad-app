@@ -1,3 +1,4 @@
+
 var express = require("express"); //used to create webservers
 var morgan = require("morgan"); // output logs of a server
 var path = require("path");
@@ -5,23 +6,55 @@ var path = require("path");
 var app = express();
 app.use(morgan("combined"));
 
-let articleOne = {
-  title: "Article One | Rakesh",
-  heading: "Article first",
-  date: "Sep 5, 2017",
-  content: `
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, optio enim! Vel enim placeat dolor laboriosam
-  debitis mollitia soluta quas ducimus in nihil quaerat repellat consequatur animi nemo, veniam fugiat!</p>
+let articles = {
+  'article-one' : {
+    title: "Article One | Rakesh",
+    heading: "Article first",
+    date: "Sep 5, 2017",
+    content: `
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, optio enim! Vel enim placeat dolor laboriosam
+    debitis mollitia soluta quas ducimus in nihil quaerat repellat consequatur animi nemo, veniam fugiat!</p>
+    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, optio enim! Vel enim placeat dolor laboriosam
+    debitis mollitia soluta quas ducimus in nihil quaerat repellat consequatur animi nemo, veniam fugiat!</p>
   
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, optio enim! Vel enim placeat dolor laboriosam
-  debitis mollitia soluta quas ducimus in nihil quaerat repellat consequatur animi nemo, veniam fugiat!</p>
+    `
+  },
+  
+  'article-two' : {
+    title: "Article Two | Rakesh",
+    heading: "Article Second",
+    date: "jan 5, 2017",
+    content: `
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, optio enim! Vel enim placeat dolor laboriosam
+    debitis mollitia soluta quas ducimus in nihil quaerat repellat consequatur animi nemo, veniam fugiat!</p>
+    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, optio enim! Vel enim placeat dolor laboriosam
+    debitis mollitia soluta quas ducimus in nihil quaerat repellat consequatur animi nemo, veniam fugiat!</p>
+  
+    `
+  },
 
-  `
+  'article-three' : {
+    title: "Article Three | Rakesh",
+    heading: "Article Third",
+    date: "Feb 5, 2017",
+    content: `
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, optio enim! Vel enim placeat dolor laboriosam
+    debitis mollitia soluta quas ducimus in nihil quaerat repellat consequatur animi nemo, veniam fugiat!</p>
+    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, optio enim! Vel enim placeat dolor laboriosam
+    debitis mollitia soluta quas ducimus in nihil quaerat repellat consequatur animi nemo, veniam fugiat!</p>
+  
+    `
+  }
 };
+
 
 let createTemplate = data => {
   let title = data.title,
   date = data.date,
+  heading = data.heading,
   content = data.content;
   let htmlTemplate = `
   <!DOCTYPE html>
@@ -39,7 +72,7 @@ let createTemplate = data => {
       <div class="container">
           <a href="/">Home</a>
           <hr>
-          <h3>Article First</h3>
+          <h3>${heading}</h3>
           <div>${date}</div>
           <div>
             ${content}
@@ -56,16 +89,10 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "ui", "index.html"));
 });
 
-app.get("/article-one", (req, res) => {
-  res.send(createTemplate(articleOne));
-});
-
-app.get("/article-two", (req, res) => {
-  res.sendFile(path.join(__dirname, "ui", "article-two.html"));
-});
-
-app.get("/article-three", (req, res) => {
-  res.sendFile(path.join(__dirname, "ui", "article-three.html"));
+// :articleName = express function(:) which convert in variable
+app.get("/:articleName", (req, res) => {
+  let articleName = req.params.articleName;
+  res.send(createTemplate(articles[articleName]));
 });
 
 app.get("/ui/style.css", function(req, res) {
