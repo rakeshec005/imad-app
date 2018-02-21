@@ -86,10 +86,10 @@ let createTemplate = data => {
 };
 
 // added counter end point
-let cont = 0;
-app.get("/cont", (req, res) => {
-  cont += 1;
-  res.send(cont.toString());
+let counter = 0;
+app.get("/counter", (req, res) => {
+  counter += 1;
+  res.send(counter.toString());
 });
 // Handling specific url
 app.get("/", function(req, res) {
