@@ -91,7 +91,7 @@ app.get("/", function(req, res) {
 
 // :articleName = express function(:) which convert in variable
 app.get("/:articleName", (req, res) => {
-  let articleName = req.params.articleName;
+  let articleName = req.params.articleName;  //provided by express framework
   res.send(createTemplate(articles[articleName]));
 });
 
