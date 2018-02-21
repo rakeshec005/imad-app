@@ -1,10 +1,11 @@
-var express = require('express');
-var morgan = require('morgan');
+var express = require('express');  //used to create webservers
+var morgan = require('morgan'); // output logs of a server
 var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
 
+// Handling specific url
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
