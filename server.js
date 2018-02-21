@@ -14,7 +14,7 @@ app.get('/article-one', (req, res) => {
   res.send('Article one requested');
 });
 
-app.get('article-two', (req, res) => {
+app.get('/article-two', (req, res) => {
   res.send('Article two requested');
 });
 
