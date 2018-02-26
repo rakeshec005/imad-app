@@ -96,11 +96,29 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "ui", "index.html"));
 });
 
+// Submit name endpoint
+let names = [];
+app.get("/submit-name", (req, res) => {
+  // Get the name from the request
+  //let name = req.params.name;
+
+  // Another way of send data - query parameter
+  // expecting request like, URL : /submit-name?name=xxxx
+  let name = req.query.name;
+
+  names.push(name);
+
+  // In JS, response is in a format of string. It can't be array or object.
+  // JSON
+  res.send(JSON.stringify(names));
+});
+
 // :articleName = express function(:) which convert in variable (Url parametrization)
 app.get("/:articleName", (req, res) => {
   let articleName = req.params.articleName;  //provided by express framework
   res.send(createTemplate(articles[articleName]));
 });
+
 
 app.get("/ui/style.css", function(req, res) {
   res.sendFile(path.join(__dirname, "ui", "style.css"));
