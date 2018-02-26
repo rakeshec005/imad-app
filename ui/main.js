@@ -31,3 +31,19 @@ btn.onclick = () => {
     xhr.send(null);
    
 }
+
+// Submit name
+let nameInput = document.getElementById('name');
+let name = nameInput.value();
+submit.onclick = () => {
+    // Make a request to server and send the name
+
+    // capture a list of name and render it as a list
+    let names = ['name1', 'name2', 'name3', 'name4'];
+    let list = '';
+    for(let i=0; i<names.length; i++){
+        list += '<li>'+ names[i] + '</li>';
+    }
+    let ul = document.getElementById('namelist');
+    ul.innerHTML = list;
+}
