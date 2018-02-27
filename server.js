@@ -2,6 +2,15 @@
 var express = require("express"); //used to create webservers
 var morgan = require("morgan"); // output logs of a server
 var path = require("path");
+let Pool = require("pg").Pool;
+
+let config = {
+  user: 'rak1994kumar',
+  database: 'rak1994kumar',
+  host: 'db.imad.hasura-app.io',
+  port: '5432',
+  password: process.env.DB_PASSWORD
+};
 
 var app = express();
 app.use(morgan("combined"));
@@ -96,6 +105,19 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "ui", "index.html"));
 });
 
+let pool = new Pool(config);
+app.get("/test-db", (req, res) => {
+  // Make a select request
+  // return a response with the results
+  pool.query('SELECT * FROM test', (err, result) => {
+    if(err){
+      res.status(500).send(err.toString);
+    }
+    else{
+      res.send(JSON.stringify(result));
+    }
+  });
+});
 // Submit name endpoint
 let names = [];
 app.get("/submit-name", (req, res) => {
